@@ -1,0 +1,98 @@
+ create database adarshCare;
+ use adarshCare;
+  create table bonestage (
+    -> id 
+    -> int(6),
+    -> name varchar(20),
+    -> stage varchar(25),
+    -> primary key(id)
+    -> );
+ describe bonestage;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int(6)      | NO   | PRI | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| stage | varchar(25) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+ create table bones
+    -> (
+    -> id int(10),
+    -> bone int(10),
+    -> stages varchar(20),
+    -> text varchar(10)
+    -> ,
+    -> foreign key(bone) references bonestage(id)
+    -> );
+Query OK, 0 rows affected (0.26 sec)
+ describe bones;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int(10)     | YES  |     | NULL    |       |
+| bone   | int(10)     | YES  | MUL | NULL    |       |
+| stages | varchar(20) | YES  |     | NULL    |       |
+| text   | varchar(10) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+ create table physician
+    -> (
+    -> id int(10),
+    -> name varchar(20),
+    -> password varchar(20),
+    -> primary key(name)
+    -> );
+Query OK, 0 rows affected (0.20 sec)
+
+describe physician;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(10)     | YES  |     | NULL    |       |
+| name     | varchar(20) | NO   | PRI | NULL    |       |
+| password | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+ create table patients ( idpatient int(10), personalNo int(20), secondname varchar(20), firstname varchar(20), sex varchar(10), dob int(15), placeofbirth varchar(20), placeofresidence varchar(20), physicians varchar(20), primary key (personalNo), foreign key(physicians) references physician(name) );
+Query OK, 0 rows affected (0.32 sec)
+
+describe patients;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| idpatient        | int(10)     | YES  |     | NULL    |       |
+| personalNo       | int(20)     | NO   | PRI | NULL    |       |
+| secondname       | varchar(20) | YES  |     | NULL    |       |
+| firstname        | varchar(20) | YES  |     | NULL    |       |
+| sex              | varchar(10) | YES  |     | NULL    |       |
+| dob              | int(15)     | YES  |     | NULL    |       |
+| placeofbirth     | varchar(20) | YES  |     | NULL    |       |
+| placeofresidence | varchar(20) | YES  |     | NULL    |       |
+| physicians       | varchar(20) | YES  | MUL | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+
+ create table consultations ( idconsultation int(20), personalno int(15), dateofconsultation int(20), weight int(10), diagnostic varchar(20), selectedbones int(10), realscore varchar(20), maturityscore int(10), boneage int(10), physicians varchar(20), foreign key(personalno) references patients(personalNo), foreign key(physicians) references physician (name) );
+Query OK, 0 rows affected (0.25 sec)
+describe consultations;
++--------------------+-------------+------+-----+---------+-------+
+| Field              | Type        | Null | Key | Default | Extra |
++--------------------+-------------+------+-----+---------+-------+
+| idconsultation     | int(20)     | YES  |     | NULL    |       |
+| personalno         | int(15)     | YES  | MUL | NULL    |       |
+| dateofconsultation | int(20)     | YES  |     | NULL    |       |
+| weight             | int(10)     | YES  |     | NULL    |       |
+| diagnostic         | varchar(20) | YES  |     | NULL    |       |
+| selectedbones      | int(10)     | YES  |     | NULL    |       |
+| realscore          | varchar(20) | YES  |     | NULL    |       |
+| maturityscore      | int(10)     | YES  |     | NULL    |       |
+| boneage            | int(10)     | YES  |     | NULL    |       |
+| physicians         | varchar(20) | YES  | MUL | NULL    |       |
++--------------------+-------------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
